@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,10 +24,22 @@ namespace CopyToolWpfApp
         public MainWindow()
         {
             InitializeComponent();
+            Init();
+        }
+
+        private void Init()
+        {
+            txtSource.Text = CopyToolSettings.Default.SourcePath;
+            txtDestination.Text = CopyToolSettings.Default.DestinationPath;
         }
 
         private void btnCopy_Click(object sender, RoutedEventArgs e)
         {
+            CopyToolSettings.Default.SourcePath = txtSource.Text;
+            CopyToolSettings.Default.DestinationPath = txtDestination.Text;
+
+            CopyToolSettings.Default.Save();
+
             var sourcePath = txtSource.Text;
             var destinationPath = txtDestination.Text;
 
