@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -33,7 +34,25 @@ public class CopyUtil
         {
             if (destinationDlls.TryGetValue(dll.Key, out string destinationDllPath))
             {
-               var isSame = IsFilesSame(dll.Value, destinationDllPath);
+                var sourceFile = dll.Value;
+                
+               var isFilesAreSame = IsFilesSame(dll.Value, destinationDllPath);
+
+                if(isFilesAreSame)
+                {
+                    continue;
+                }
+
+                // To copy a file to another location and
+                // overwrite the destination file if it already exists.
+                System.IO.File.Copy(sourceFile, destinationDllPath, true);
+
+                var sourcePdbFilePath = System.IO.Path.ChangeExtension(sourceFile, ".pdb");
+                var destPdbPath = System.IO.Path.ChangeExtension(destinationDllPath, ".pdb");
+                if(File.Exists(destPdbPath))
+                {
+                    File.Copy(sourcePdbFilePath, destPdbPath, true);
+                }
             }
         }
     }
