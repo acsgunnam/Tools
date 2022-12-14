@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,20 +18,46 @@ namespace AppendTextToFile
                 string docPath =
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-                var files = from file in Directory.EnumerateFiles(docPath, "*.txt", SearchOption.AllDirectories)
-                            from line in File.ReadLines(file)
-                            where line.Contains("Microsoft")
-                            select new
-                            {
-                                File = file,
-                                Line = line
-                            };
+                // from file in Directory.EnumerateFiles(docPath, "*.txt", SearchOption.AllDirectories)
 
-                foreach (var f in files)
+                var file = @"TestApp.csproj";
+
+                var text = @"abc";
+
+                var lines = File.ReadLines(file).ToList();
+
+
+                foreach (var f in lines)
                 {
-                    Console.WriteLine($"{f.File}\t{f.Line}");
+                    if(lines.Contains(text))
+                    {
+                        return;
+                    }
                 }
-                Console.WriteLine($"{files.Count().ToString()} files found.");
+
+                int index = 0;
+
+                var compareString = "</ItemGroup>";
+
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    
+                    if (lines[i].Contains(compareString))
+                        index = i + 1;
+                }
+
+                var insertText = @"  <ItemGroup>
+    <PackageReference Include=""com.github.akovac35.Logging.Testing"" Version=""*"" />
+  </ItemGroup>";
+
+                if (index != 0)
+                {
+                    lines.Insert(index, insertText);
+                    // File.Delete(file);
+                    File.WriteAllLines(file, lines);
+                }
+
+                Console.WriteLine($"{lines.Count().ToString()} lines found.");
             }
             catch (UnauthorizedAccessException uAEx)
             {
