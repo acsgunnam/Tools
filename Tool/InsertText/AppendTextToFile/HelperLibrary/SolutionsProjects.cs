@@ -19,9 +19,6 @@ namespace HelperLibrary
 
             try
             {
-
-
-
                 string solutionPath = Path.GetDirectoryName(solutionFileAndPath);
 
                 var lines = File.ReadAllLines(solutionFileAndPath).ToList();
@@ -29,7 +26,6 @@ namespace HelperLibrary
                 {
                     try
                     {
-
                         if (line.Contains(projectStart))
                         {
                             string[] lineSplit = line.Split(',');
@@ -41,8 +37,6 @@ namespace HelperLibrary
 
                             result.Add(projectPath);
                         }
-
-
                     }
                     catch (Exception ex)
                     {
@@ -50,8 +44,6 @@ namespace HelperLibrary
                         MessageBox.Show(ex.ToString());
                     }
                 }
-
-
             }
             catch (Exception ex)
             {

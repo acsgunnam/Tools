@@ -23,8 +23,6 @@ namespace AppendTextToFile
         {
             try
             {
-
-
                 var packageCodeAnalysisMetrics = @"Microsoft.CodeAnalysis.Metrics";
 
                 var lines = File.ReadLines(file).ToList();
