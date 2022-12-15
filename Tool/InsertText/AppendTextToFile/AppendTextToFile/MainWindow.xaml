@@ -7,7 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="button_AddContent"  Content="Add Content" HorizontalAlignment="Left" Margin="158,244,0,0" VerticalAlignment="Top" Height="54" Width="242" Click="button_AddContent_Click" />
+        <StackPanel Orientation = "Vertical">
+            <Grid ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Solution" HorizontalAlignment="Left" Margin="59,8,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="solutionTextBox" Grid.Column="1" TextWrapping="Wrap" Text="" ToolTip="solution with full path (c:\folderName\abc.sln)" Margin="28,0,28,0"/>
+
+            </Grid>
+            <Button x:Name="button_AddContent"  Content="Add Content" HorizontalAlignment="Left" Margin="158,244,0,0" VerticalAlignment="Top" Height="54" Width="242" Click="button_AddContent_Click" />
+            
+        </StackPanel>
+       
 
     </Grid>
 </Window>

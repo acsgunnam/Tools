@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HelperLibrary;
 
 namespace AppendTextToFile
 {
@@ -28,7 +29,9 @@ namespace AppendTextToFile
 
         private void button_AddContent_Click(object sender, RoutedEventArgs e)
         {
-            LineToFile.AddLine();
+           List<string> csprojs = SolutionsProjects.GetProjectsFromSolutions(solutionTextBox.Text);
+            
+            LineToFile.UpdateText(csprojs);
         }
     }
 }
