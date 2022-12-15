@@ -44,9 +44,12 @@ namespace AppendTextToFile
 
                 for (int i = 0; i < lines.Count; i++)
                 {
-                    
+
                     if (lines[i].Contains(compareString))
+                    {
                         lineNumberEndofItemGroup = i + 1;
+                        break;
+                    }
                 }
 
                 var insertText = @"  <ItemGroup>
