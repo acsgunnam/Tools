@@ -6,6 +6,9 @@ namespace HelperLibrary
     public class SolutionsProjects
     {
         public const string projectStart = "Project(\"{";
+
+        public const string csProj = "csproj";
+        
         public static List<string> GetProjectsFromSolutions(string solutionFileAndPath)
         {
             List<string> result = new List<string>();
@@ -30,6 +33,11 @@ namespace HelperLibrary
                         {
                             string[] lineSplit = line.Split(',');
                             string projectPath = lineSplit[1];
+
+                            if(!projectPath.Contains(csProj))
+                            {
+                                continue;
+                            }
 
                             projectPath = projectPath.Trim().Trim('"');
 

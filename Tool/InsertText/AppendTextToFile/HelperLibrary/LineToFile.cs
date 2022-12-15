@@ -29,9 +29,9 @@ namespace AppendTextToFile
 
                 // if package is already added just ignore it
 
-                foreach (var f in lines)
+                foreach (var line in lines)
                 {
-                    if(lines.Contains(packageCodeAnalysisMetrics))
+                    if(line.Contains(packageCodeAnalysisMetrics))
                     {
                         return;
                     }
